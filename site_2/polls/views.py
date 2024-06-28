@@ -5,7 +5,7 @@ from .models import Question
 # 메인페이지
 # 모든 설문조사 주제를 보여줌
 def index(request):
-    latest_question_list = Question.objects.order_by('pub_date') # 날짜기준 오름차순, -pub_date' 일시 내림차순
+    latest_question_list = Question.objects.order_by('-pub_date') # 날짜기준 내림차순, 최신순
     context = {'latest_question_list': latest_question_list}
 
     return render(request, 'polls/index.html', context)
