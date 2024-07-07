@@ -1,5 +1,5 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404 # 클래스의 행이 없다면 404 에러
+from django.http import HttpResponse, Http404
 from .models import Question
 
 # 메인페이지
@@ -13,8 +13,17 @@ def index(request):
 
 # 설문지별 상세페이지
 def detail(request, question_id): 
+    # try:
+    #     question = Question.objects.get(id=question_id)
+    # except Question.DoesNotExist:
+    #     # 404 에러를 터뜨리며 에러 문구 함께 리턴
+    #     raise Http404('Question {} does not exist'.format(question_id))
 
-    return HttpResponse("You're looking at question {}.".format(question_id))
+    # list(QuerySet)가 return될 시에는 get_object_or_404 대신 get_list_or_404를 활용
+    question = get_object_or_404(Question, id=question_id) # 클래스, 기준 값
+
+    return render(request, 'polls/detail.html', {'question': question})
+
 
 def vote(request, question_id):
     response = "You're looking at vote of question {}."
