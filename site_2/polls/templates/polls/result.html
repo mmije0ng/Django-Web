@@ -1,0 +1,11 @@
+<h1>{{ question.question_text }}</h1>
+
+<!--설문지별 투표 결과 출력-->
+<ul>
+    {% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} got voted for {{ choice.votes }} times.</li>
+    {% endfor %}
+</ul>
+
+<!--상세 페이지로 이동-->
+<a href="{% url 'polls:detail' question.id %}">Vote again?</a>

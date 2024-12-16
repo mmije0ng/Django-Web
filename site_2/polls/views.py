@@ -10,7 +10,6 @@ def index(request):
 
     return render(request, 'polls/index.html', context)
 
-
 # 설문지별 상세페이지
 def detail(request, question_id): 
     # try:
@@ -24,6 +23,7 @@ def detail(request, question_id):
 
     return render(request, 'polls/detail.html', {'question': question})
 
+# 설문조사 투표 페이지
 def vote(request, question_id):
     question = get_object_or_404(Question, id=question_id)
 
@@ -42,7 +42,7 @@ def vote(request, question_id):
         selected_choice.save() # db에 저장
         return redirect('polls:results', question_id=question.id)
 
-
+# 설문조사 결과 페이지
 def results(request, question_id):
-    response = "You're looking at the results of question {}."
-    return HttpResponse(response.format(question_id))
+    question = get_object_or_404(Question, pk=question_id)
+    return render(request, 'polls/result.html', {'question': question})
