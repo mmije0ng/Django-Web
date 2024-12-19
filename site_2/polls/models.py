@@ -19,6 +19,13 @@ class Question(models.Model):
         # now - datetime.timedelta(days=1) : 현재 날짜에서 하루어치를 뺀 값
         # 주제가 등록된 시점이 함수가 호출되는 시점과 호출되는 시점의 하루이전의 사이에 있는지 여부
         return now >= self.pub_date >= now - datetime.timedelta(days=1)
+    
+    # 관리자 페이지 Question 리스트에서 True/False 문구를 아이콘으로 변경
+    was_published_recently.boolean = True
+    # 'WAS PUBLISHED RECENTLY' 열의 정렬 기준을 pub_date(설문조사 주제 생성 시간)로 세팅
+    was_published_recently.admin_order_field = 'pub_date'
+    # 'WAS PUBLISHED RECENTLY' 열의 이름 변경
+    was_published_recently.short_description = 'Published recently?'
 
 # 설문조사 선택지
 class Choice(models.Model):
