@@ -1,0 +1,17 @@
+cv_project/settings.py
+
+*.log
+
+*.pot
+
+*.pyc
+
+cv_project/__pycache__
+
+local_settings.py
+
+db.sqlite3
+
+db.sqlite3-journal media
+
+static
